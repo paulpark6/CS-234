@@ -6,7 +6,7 @@
 ## =======================================================
 ##
 
-import check
+import modules.check as check
 
 def sum_of_three(num: int):
     """
