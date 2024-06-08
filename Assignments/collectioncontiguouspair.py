@@ -1,7 +1,9 @@
 from modules.contiguous import *
 from modules.pair import *
 import modules.check as check
-
+#from pair import *
+#from contiguous import *
+#rom check import *
 INFINITY = 100
 
 class Collection:
