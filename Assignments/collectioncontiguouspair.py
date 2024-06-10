@@ -1,9 +1,20 @@
-from modules.contiguous import *
-from modules.pair import *
-import modules.check as check
-#from pair import *
-#from contiguous import *
-#rom check import *
+##
+## =======================================================
+## Paul Park (20949359)
+## CS 234 Spring 2024
+## Assignment 2, Problem 1
+## =======================================================
+##
+
+#from modules.contiguous import *
+#from modules.pair import *
+#import modules.check as check
+
+
+from pair import *
+from contiguous import *
+import check
+
 INFINITY = 100
 
 class Collection:
@@ -81,11 +92,6 @@ class Collection:
         Requires: self is nonempty
 
         """
-        # QUESTION: what are we returning? Pair(item, previous # of copies) or just Item or Pair(item, new # of copies after removal) -> will do just item for now
-
-        # Ensure the collection is nonempty
-        if self.size <= 0:
-            return None
 
         # Access the last element in the collection
         remove = self.array.access(self.size - 1)
