@@ -1,4 +1,11 @@
-from doubledictnode import *
+## =======================================================
+## Paul Park (20949359)
+## CS 234 Spring 2024
+## Assignment 4, P1
+## =======================================================
+
+from modules.doubledictnode import *
+import modules.check as check
 
 class DoubleDict:
     """
@@ -19,6 +26,9 @@ class DoubleDict:
          __init__: -> DoubleDict
 
         """
+        self._root = None # node storing the root of BST
+        self._head = None # node that appears first in ordered linked list
+
 
     def __repr__(self):
         """
@@ -63,6 +73,7 @@ class DoubleDict:
         is_empty: DoubleDict -> Bool
         
         """
+        return (self._root is None) and (self._head is None)
 
     def look_up_one(self, key_one):
         """
@@ -73,6 +84,26 @@ class DoubleDict:
             -> (anyof Int False)
 
         """
+        node = self._find_bst(self._root,key_one) # look for key_one in BST
+
+        # check if key_one is found or not
+        if node is None:
+            return False # key_one is not found in BST
+        else:
+            return node.access_key_two() # gets the pair of key one
+        
+    def _find_bst(self, root, key_one):
+        """
+        self._find_bst(root, key_one) produces the node with key_one in BST.
+        _find_bst: DoubleDictNode Str 
+            -> (anyof DoubleDictNode None)
+        """
+        if root is None or root.access_key_one() == key_one:
+            return root
+        elif key_one < root.access_key_one():
+            return self._find_bst(root.access_left(), key_one)
+        else:
+            return self._find_bst(root.access_right(), key_one)
             
     def look_up_two(self, key_two):
         """
@@ -83,6 +114,13 @@ class DoubleDict:
             -> (anyof Str False)
 
         """
+        node = self._head # get the head of ordered linked list
+        while (node is not None): # check if node is empty or not
+            if node.access_key_two() == key_two: # check if node has key_two
+                return node.access_key_one() # return the pair of key_two
+            node = node.access_next() # move to next node
+        return False # key_two is not found
+
 
     def add_one(self, key_one, key_two):
         """
@@ -97,6 +135,7 @@ class DoubleDict:
                       second key of any data item in self
 
         """
+        
         
 
 
