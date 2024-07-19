@@ -4,8 +4,12 @@
 ## Assignment 4, P1
 ## =======================================================
 
-from modules.doubledictnode import *
-import modules.check as check
+#from modules.doubledictnode import *
+#import modules.check as check
+
+
+
+from doubledictnode import *
 
 class DoubleDict:
     """
@@ -135,7 +139,49 @@ class DoubleDict:
                       second key of any data item in self
 
         """
+        new_node = DoubleDictNode(key_one, key_two)
+            
+        # when BST and linked list are empty
+        if self._root is None and self._head is None:
+            self._root = new_node
+            self._head = new_node
+            return
         
+        # when BST is not empty
+        cnode = self._root  # get the root
+        while True:
+            cnode_key = cnode.access_key_one()  # get key_one
+            
+            if key_one < cnode_key:  # go left when key_one is less than current node
+                if cnode.access_left() is None:
+                    cnode.link_left(new_node)
+                    new_node.link_parent(cnode)
+                    break
+                cnode = cnode.access_left()
+            elif key_one > cnode_key:  # go right when key_one is greater than current node
+                if cnode.access_right() is None:
+                    cnode.link_right(new_node)
+                    new_node.link_parent(cnode)
+                    break
+                cnode = cnode.access_right()
+            else:
+                cnode.store_key_two(key_two)
+                return
         
+        # adding key_two to linked list
+        cptr = self._head  # get the head
+        prev = None
+        while cptr is not None and cptr.access_key_two() < key_two:
+            prev = cptr
+            cptr = cptr.access_next()
+        
+        new_node.link_next(cptr)
+        
+        if prev is None:
+            self._head = new_node
+        else:
+            prev.link_next(new_node)
+        
+    
 
 
